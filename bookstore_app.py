@@ -483,7 +483,7 @@ def books_with_publisher():
             p.founded
 
         FROM  books b
-        JOIN publishers p ON b.publisher_id = p.id
+        LEFT JOIN publishers p ON b.publisher_id = p.id
         {where}
         ORDER BY b.title
     """
@@ -573,7 +573,6 @@ def create_order():
         
         #for迴圈到這
         
-        print(item_rows)
         # 開始建立訂單（狀態直接設為 paid）
         cursor.execute(
             "INSERT INTO orders (customer_id, total_amount, status) VALUES (%s, %s, 'pending')",
